@@ -701,6 +701,7 @@
       box-shadow: 0 1px 0 #3f3f46;
     }
 
+    /* 忍者AdMax広告枠 */
     .ad-card {
       border: 1px dashed #a1a1aa;
       border-radius: 6px;
@@ -1070,7 +1071,7 @@
     <div class="ad-card">
       <div class="ad-meta">PR</div>
       <!-- admax -->
-      <script src="https://adm.shinobi.jp/s/1c380eeb7c0e496c92d3f3ebf95e2bca"></script>
+      <script src="https://adm.shinobi.jp/s/cd307e11b20fb0bf547874f5d0f535f0"></script>
       <!-- admax -->
     </div>
   </div>
@@ -1537,6 +1538,7 @@ function closeRequestModal() {
   document.getElementById("request-modal").style.display = "none";
 }
 
+// 忍者AdMax広告枠およびGoogleフォーム連携・本番送信関数
 async function submitSchoolRequest() {
   const pref = document.getElementById("req-school-pref").value.trim();
   const name = document.getElementById("req-school-name").value.trim();
