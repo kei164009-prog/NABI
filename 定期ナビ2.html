@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google検索・SEO基本設定 -->
+  <title>定期ナビ | いつもの定期テストで大学合格判定・全国偏差値を逆算</title>
+  <meta name="description" content="模試を受けなくても、いつもの定期テストで大学合格判定ができる！全国約500校の高校・中高一貫校データ内蔵。定期考査の平均点・最高点・得点から、河合全統模試換算の全国偏差値および東大・早慶・MARCH・国公立など主要36大学の合否確率を統計的に逆算判定する無料ツールです。">
+  <meta name="keywords" content="定期テスト,大学合格判定,定期ナビ,高校偏差値換算,定期考査,模試偏差値,大学受験,Q&A">
+  <meta name="robots" content="index, follow">
+
+  <!-- サイト名・SNS共有設定 -->
+  <meta property="og:site_name" content="定期ナビ">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="定期ナビ | いつもの定期テストで大学合格判定・全国偏差値を逆算">
+  <meta property="og:description" content="いつもの定期テストで大学合格判定ができる。全国約500校の高校データ内蔵。学校のテスト結果から狙える大学群と実戦模試換算偏差値を高精度に逆算判定。">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="定期ナビ | いつもの定期テストで大学合格判定・全国偏差値を逆算">
+  <meta name="twitter:description" content="いつもの定期テストで大学合格判定ができる。全国約500校の高校データ内蔵。学校のテスト結果から狙える大学群と実戦模試換算偏差値を高精度に逆算判定。">
+
+  <!-- アイコン（ファビコン）設定 -->
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
+
+  <!-- Google検索向け構造化データ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "定期ナビ",
+    "alternateName": ["テイキナビ", "TEIKINAVI"],
+    "url": "https://teiki-navi.pages.dev/"
+  }
+  </script>
+
+  <!-- 構造化データ（教育アプリ認識） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "定期ナビ",
+    "headline": "いつもの定期テストで大学合格判定・全国偏差値を逆算",
+    "description": "全国約500校の高校・中高一貫校データ内蔵。いつもの定期テストの点数から大学合否確率を即座に逆算判定する教育ツール",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fafafa;
+      color: #09090b;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 0;
+    }
+
+    /* ヘッダーナビゲーション */
+    header {
+      background: #09090b;
+      color: #ffffff;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #27272a;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .brand {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .header-sub {
+      font-size: 11px;
+      color: #a1a1aa;
+    }
+    @media (max-width: 560px) {
+      .header-sub {
+        display: none;
+      }
+    }
+    .header-nav {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-link {
+      color: #d4d4d8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .wrapper {
+      max-width: 660px;
+      margin: 28px auto 0;
+      padding: 0 16px;
+    }
+
+    #shared-result-card {
+      display: none;
+      background: #ffffff;
+      border: 2px solid #09090b;
+      border-radius: 6px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .shared-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      background: #09090b;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .shared-msg {
+      font-size: 18px;
+      font-weight: 800;
+      color: #09090b;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .shared-sub {
+      font-size: 13px;
+      color: #71717a;
+      margin-bottom: 14px;
+    }
+
+    .hero {
+      margin-bottom: 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      color: #09090b;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .hero p {
+      font-size: 13px;
+      color: #71717a;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #71717a;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* 入力モード切り替えタブ */
+    .mode-tab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .btn-mode-tab {
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      color: #71717a;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-mode-tab.active {
+      background: #09090b;
+      color: #ffffff;
+      border-color: #09090b;
+    }
+
+    /* キーワード検索入力ボックスとサジェストリスト */
+    .search-box-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #09090b;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+    }
+    .search-suggest-box {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid #09090b;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 20;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .suggest-item {
+      padding: 10px 12px;
+      font-size: 12px;
+      border-bottom: 1px solid #f4f4f5;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+    .suggest-item:hover {
+      background: #f4f4f5;
+    }
+    .suggest-name {
+      font-weight: 700;
+      color: #09090b;
+    }
+    .suggest-meta {
+      font-size: 11px;
+      color: #71717a;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #09090b;
+    }
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d4d4d8;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #09090b;
+      background: #ffffff;
+      transition: all 0.15s ease;
+    }
+    select:disabled {
+      background: #f4f4f5;
+      color: #a1a1aa;
+      cursor: not-allowed;
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: #09090b;
+      box-shadow: 0 0 0 1px #09090b;
+    }
+
+    .selected-school-banner {
+      display: none;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 14px;
+      color: #27272a;
+    }
+    .selected-school-banner strong {
+      color: #09090b;
+    }
+
+    .request-link-wrap {
+      text-align: right;
+      margin-top: -6px;
+      margin-bottom: 14px;
+    }
+    .request-link {
+      font-size: 11px;
+      color: #71717a;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .request-link:hover {
+      color: #09090b;
+    }
+
+    /* 角形3Dメインボタン */
+    .btn-3d-main {
+      width: 100%;
+      background: #09090b;
+      color: #ffffff;
+      border: 1px solid #09090b;
+      border-radius: 4px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      position: relative;
+      top: 0;
+      box-shadow: 0 4px 0 #3f3f46, 0 6px 12px rgba(0,0,0,0.12);
+      transition: all 0.08s ease;
+      margin-top: 10px;
+    }
+    .btn-3d-main:hover {
+      background: #18181b;
+      box-shadow: 0 4px 0 #52525b, 0 8px 16px rgba(0,0,0,0.15);
+    }
+    .btn-3d-main:active {
+      top: 3px;
+      box-shadow: 0 1px 0 #3f3f46, 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #loading {
+      display: none;
+      text-align: center;
+      padding: 30px 0;
+      color: #71717a;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    #result-dashboard {
+      display: none;
+    }
+
+    .history-badge {
+      display: none;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #3f3f46;
+      margin-bottom: 16px;
+    }
+    .history-badge strong {
+      color: #09090b;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 580px) {
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 4px;
+      padding: 12px;
+      text-align: center;
+    }
+    .metric-card.primary {
+      background: #09090b;
+      color: #ffffff;
+      border-color: #09090b;
+    }
+    .metric-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #71717a;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .metric-card.primary .metric-label {
+      color: #a1a1aa;
+    }
+    .metric-value {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .metric-sub {
+      font-size: 10px;
+      color: #a1a1aa;
+      margin-top: 2px;
+    }
+    .metric-card.primary .metric-sub {
+      color: #71717a;
+    }
+
+    .simulator-card {
+      background: #fcfcfc;
+      border: 1px solid #18181b;
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .simulator-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .simulator-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #09090b;
+    }
+    .simulator-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: #09090b;
+      font-family: monospace;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      background: #e4e4e7;
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      background: #09090b;
+      cursor: pointer;
+    }
+
+    .scale-card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .scale-container {
+      position: relative;
+      margin: 14px 0 10px 75px;
+      padding: 6px 0;
+    }
+    .scale-axis {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #e4e4e7;
+      border-radius: 2px;
+    }
+    .scale-tier {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      padding-left: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #3f3f46;
+    }
+    .scale-pointer {
+      position: absolute;
+      left: -75px;
+      display: flex;
+      align-items: center;
+      transition: top 0.25s ease;
+      z-index: 5;
+    }
+    .pointer-tag {
+      background: #09090b;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 2px;
+    }
+    .pointer-arrow {
+      width: 0;
+      height: 0;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 5px solid #09090b;
+    }
+
+    .table-card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #e4e4e7;
+      padding-bottom: 8px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: #71717a;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+    .tab-btn.active {
+      background: #09090b;
+      color: #ffffff;
+    }
+
+    table.matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    table.matrix-table th {
+      text-align: left;
+      padding: 8px 6px;
+      border-bottom: 1px solid #09090b;
+      font-weight: 700;
+      color: #09090b;
+      font-size: 11px;
+    }
+    table.matrix-table td {
+      padding: 9px 6px;
+      border-bottom: 1px solid #f4f4f5;
+      color: #27272a;
+    }
+    .badge-eval {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 2px;
+      text-align: center;
+      min-width: 24px;
+    }
+    .eval-A { background: #09090b; color: #ffffff; }
+    .eval-B { background: #3f3f46; color: #ffffff; }
+    .eval-C { background: #71717a; color: #ffffff; }
+    .eval-D { border: 1px solid #d4d4d8; color: #71717a; }
+    .eval-E { color: #a1a1aa; }
+
+    .advisory-card {
+      background: #ffffff;
+      border: 1px solid #09090b;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .advisory-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .roadmap-step {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #e4e4e7;
+    }
+    .roadmap-step:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #71717a;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .step-content {
+      font-size: 12px;
+      color: #27272a;
+      line-height: 1.6;
+    }
+
+    .share-card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .share-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #09090b;
+      margin-bottom: 6px;
+    }
+    .share-url-preview {
+      font-size: 11px;
+      font-family: monospace;
+      color: #52525b;
+      background: #f4f4f5;
+      padding: 8px 10px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      word-break: break-all;
+      text-align: left;
+    }
+    .share-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    .btn-3d-sub {
+      background: #ffffff;
+      color: #09090b;
+      border: 1px solid #18181b;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      top: 0;
+      box-shadow: 0 3px 0 #18181b;
+      transition: all 0.08s ease;
+    }
+    .btn-3d-sub:hover {
+      background: #f4f4f5;
+    }
+    .btn-3d-sub:active {
+      top: 2px;
+      box-shadow: 0 1px 0 #18181b;
+    }
+    .btn-3d-sub.dark {
+      background: #09090b;
+      color: #ffffff;
+      box-shadow: 0 3px 0 #3f3f46;
+    }
+    .btn-3d-sub.dark:hover {
+      background: #18181b;
+    }
+    .btn-3d-sub.dark:active {
+      top: 2px;
+      box-shadow: 0 1px 0 #3f3f46;
+    }
+
+    .ad-card {
+      border: 1px dashed #a1a1aa;
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+      background: #ffffff;
+      margin-bottom: 24px;
+    }
+    .ad-meta {
+      font-size: 10px;
+      font-weight: 700;
+      color: #71717a;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 6px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .info-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #09090b;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #09090b;
+      letter-spacing: -0.01em;
+    }
+    .qa-item {
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed #e4e4e7;
+    }
+    .qa-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .qa-q {
+      font-size: 13px;
+      font-weight: 700;
+      color: #09090b;
+      margin-bottom: 4px;
+    }
+    .qa-a {
+      font-size: 12px;
+      color: #52525b;
+      line-height: 1.6;
+    }
+
+    /* モーダルウィンドウ（高校追加リクエスト） */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 9, 11, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-card {
+      background: #ffffff;
+      border: 1px solid #09090b;
+      border-radius: 6px;
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .modal-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #09090b;
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #71717a;
+    }
+    .modal-desc {
+      font-size: 12px;
+      color: #52525b;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #e4e4e7;
+      padding: 32px 16px 40px;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 11px;
+      color: #71717a;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      color: #52525b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-links a:hover {
+      color: #09090b;
+      text-decoration: underline;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #09090b;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 120;
+      pointer-events: none;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="brand">定期ナビ</div>
+    <div class="header-sub">いつもの定期テストで大学合格判定</div>
+  </div>
+  <nav class="header-nav">
+    <a href="#how-to" class="nav-link">使い方</a>
+    <a href="#logic" class="nav-link">判定基準</a>
+    <a href="#faq" class="nav-link">Q&A</a>
+  </nav>
+</header>
+
+<div class="wrapper">
+
+  <div id="shared-result-card">
+    <div class="shared-badge">共有された判定結果</div>
+    <div class="shared-msg" id="shared-status-text"></div>
+    <div class="shared-sub" id="shared-detail-text"></div>
+    <button class="btn-3d-main" style="margin-top: 0;" onclick="scrollToForm()">あなたも自分の高校で診断してみる</button>
+  </div>
+
+  <div class="hero">
+    <div class="hero-badge">模試不要・学校テスト対応</div>
+    <h1>いつもの定期テストで、大学合格判定</h1>
+    <p>模試の結果を何週間も待つ必要はありません。通っている高校と定期考査の平均点・最高点・得点を入力するだけで、全国模試換算の偏差値と志望大学の合格可能性を即座に判定します。</p>
+  </div>
+
+  <div class="card" id="form-card">
+    <div class="card-title">高校の指定</div>
+
+    <div class="mode-tab-grid">
+      <button class="btn-mode-tab active" id="tab-mode-search" onclick="switchSchoolMode('search')">高校リスト・検索から選択</button>
+      <button class="btn-mode-tab" id="tab-mode-direct" onclick="switchSchoolMode('direct')">高校偏差値を直接入力</button>
+    </div>
+
+    <!-- モードA：検索およびリスト選択 -->
+    <div id="school-mode-search-area">
+      <label for="school-search-input">高校名でキーワード検索</label>
+      <div class="search-box-wrap">
+        <input type="text" id="school-search-input" class="search-input" placeholder="学校名を入力（例: 開成、日比谷、翠嵐、北野）" oninput="onSchoolSearch()">
+        <div id="search-suggest-box" class="search-suggest-box"></div>
+      </div>
+
+      <div id="selected-school-banner" class="selected-school-banner">
+        選択中：<strong id="selected-school-name"></strong>（基準偏差値 <span id="selected-school-dev"></span>）
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="region-select">地域ブロック</label>
+          <select id="region-select" onchange="onRegionChange()">
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pref-select">都道府県 / 区分</label>
+          <select id="pref-select" onchange="onPrefChange()" disabled>
+            <option value="">先に地域を選択</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="school-select">学校名</label>
+          <select id="school-select" onchange="onSelectDropdownSchool()" disabled>
+            <option value="">先に都道府県を選択</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="request-link-wrap">
+        <span class="request-link" onclick="openRequestModal()">学校名が見当たらない場合は追加リクエスト</span>
+      </div>
+    </div>
+
+    <!-- モードB：偏差値直接入力 -->
+    <div id="school-mode-direct-area" style="display: none;">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="direct-school-name">学校名・コース名（任意）</label>
+          <input type="text" id="direct-school-name" placeholder="例: 〇〇高校 普通科">
+        </div>
+        <div class="form-group">
+          <label for="direct-school-dev">高校・コースの偏差値（必須）</label>
+          <input type="number" id="direct-school-dev" placeholder="例: 63" min="30" max="80">
+        </div>
+      </div>
+      <p style="font-size: 11px; color: #71717a; margin-top: -6px; margin-bottom: 14px;">
+        ※ネットで「高校名 偏差値」と検索して確認できる合格目標偏差値をそのまま入力してください。
+      </p>
+    </div>
+
+    <div class="card-title" style="margin-top: 10px;">考査データ入力</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="track-select">志望系統</label>
+        <select id="track-select">
+          <option value="humanities">文系（英国社型）</option>
+          <option value="sciences">理系（数理英型）</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="max-score">満点</label>
+        <input type="number" id="max-score" value="100" placeholder="100">
+      </div>
+      <div class="form-group">
+        <label for="test-max">学年最高点</label>
+        <input type="number" id="test-max" placeholder="例: 95">
+      </div>
+      <div class="form-group">
+        <label for="test-average">学年平均点</label>
+        <input type="number" id="test-average" placeholder="例: 58">
+      </div>
+      <div class="form-group full">
+        <label for="user-score">あなたの得点</label>
+        <input type="number" id="user-score" placeholder="例: 74">
+      </div>
+    </div>
+
+    <button class="btn-3d-main" onclick="runAnalysis()">診断する</button>
+  </div>
+
+  <div id="loading">多変量推論モデル照合中...</div>
+
+  <!-- 判定結果ダッシュボード -->
+  <div id="result-dashboard">
+    
+    <div id="history-badge" class="history-badge"></div>
+
+    <div class="metrics-grid">
+      <div class="metric-card primary">
+        <div class="metric-label">推定偏差値</div>
+        <div class="metric-value" id="res-dev">--</div>
+        <div class="metric-sub" id="res-range">--</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">校内上位</div>
+        <div class="metric-value" id="res-pct">--%</div>
+        <div class="metric-sub">学年パーセンタイル</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">共テ予想</div>
+        <div class="metric-value" id="res-kyote">--%</div>
+        <div class="metric-sub">得点率目安</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">突破指数</div>
+        <div class="metric-value" id="res-power">--</div>
+        <div class="metric-sub">難関大適性スコア</div>
+      </div>
+    </div>
+
+    <div class="simulator-card">
+      <div class="simulator-header">
+        <div class="simulator-title">もしもシミュレーター：得点を変えてみる</div>
+        <div class="simulator-val"><span id="sim-score-val">--</span>点</div>
+      </div>
+      <input type="range" id="score-slider" oninput="onSliderMove()">
+    </div>
+
+    <div class="scale-card">
+      <div class="card-title" style="margin-bottom: 8px;">実力分布スケール</div>
+      <div class="scale-container">
+        <div class="scale-axis"></div>
+        <div id="scale-pointer" class="scale-pointer" style="top: 178px;">
+          <div class="pointer-tag">現在地</div>
+          <div class="pointer-arrow"></div>
+        </div>
+
+        <div class="scale-tier">偏差値 68〜 / 最難関国立・難関国公立医</div>
+        <div class="scale-tier">偏差値 64〜 / 早慶・旧帝大上位</div>
+        <div class="scale-tier">偏差値 58〜 / 難関国公立・MARCH・関関同立</div>
+        <div class="scale-tier">偏差値 50〜 / 地方国公立・日東駒専・産近甲龍</div>
+        <div class="scale-tier">偏差値 44〜 / 中堅私立群</div>
+      </div>
+    </div>
+
+    <!-- 大学別判定テーブル -->
+    <div class="table-card">
+      <div class="card-title" style="margin-bottom: 8px;">志望大学別 合否推計マトリクス</div>
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="setFilter('all')">全大学</button>
+        <button class="tab-btn" onclick="setFilter('national')">国公立</button>
+        <button class="tab-btn" onclick="setFilter('private')">私立</button>
+      </div>
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>大学・学部系統</th>
+            <th>区分</th>
+            <th>ボーダー</th>
+            <th>判定</th>
+            <th>合格率</th>
+          </tr>
+        </thead>
+        <tbody id="matrix-body">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- AI学習ロードマップ -->
+    <div class="advisory-card">
+      <div class="advisory-title">AI学習戦略処方箋</div>
+      <div id="advisory-roadmap"></div>
+    </div>
+
+    <div class="share-card">
+      <div class="share-title">結果URLをシェア・友達と比較する</div>
+      <div class="share-url-preview" id="share-url-preview"></div>
+      <div class="share-grid">
+        <button class="btn-3d-sub dark" onclick="shareX()">Xでポスト</button>
+        <button class="btn-3d-sub" onclick="shareLine()">LINEで送る</button>
+        <button class="btn-3d-sub" onclick="copyResult()">URLをコピー</button>
+      </div>
+    </div>
+
+    <div class="ad-card">
+      <div class="ad-meta">PR</div>
+      <div id="a8-ad-code">
+        <p style="font-size: 12px; color: #71717a;">
+          判定結果に応じた学習プログラムの案内がここに表示されます。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card" id="how-to">
+    <div class="info-title">定期ナビの使い方</div>
+    <div class="qa-item">
+      <div class="qa-q">1. 高校を指定</div>
+      <div class="qa-a">検索窓から高校名を探すか、一覧から選択します。学校が見つからない場合は「高校偏差値を直接入力」タブに切り替えて、ネット等で確認できる高校偏差値を入力してください。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">2. 定期テストの点数を入力</div>
+      <div class="qa-a">テストの満点、学年最高点、学年平均点、あなたの得点を入力します。最高点と平均点の差から、テスト固有の難易度とばらつき（標準偏差）を逆算します。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">3. 判定と学習処方箋を確認</div>
+      <div class="qa-a">全国全統記述模試スケールに換算された推定偏差値と、志望大学別の合格確率一覧、次のランクへ上がるために必要な追加点数が即座に出力されます。</div>
+    </div>
+  </div>
+
+  <div class="info-card" id="logic">
+    <div class="info-title">判定ロジックと統計基準</div>
+    <div class="qa-item">
+      <div class="qa-q">河合塾全統模試スケールへの較正</div>
+      <div class="qa-a">高校入試の偏差値は中学生全体が母集団ですが、大学受験模試は大学進学希望者のみが母集団となるため、一般に約8〜10の偏差値差が生じます。定期ナビではこの母集団差異を教育統計学に基づき厳密にスライド補正しています。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">学年最高点による極値統計補正</div>
+      <div class="qa-a">学年最高点が判明することで、テストの真の天井（難易度）と標準偏差を特定できます。トップ層でも点数が伸びない難問考査と、高得点が密集する平易な考査を自動識別して換算します。</div>
+    </div>
+  </div>
+
+  <div class="info-card" id="faq">
+    <div class="info-title">よくある質問（Q&A）</div>
+    <div class="qa-item">
+      <div class="qa-q">Q: なぜ模試を受けなくても大学の合否判定ができるのですか？</div>
+      <div class="qa-a">A: 各高校の進学実績データ（母集団水準）と、定期考査における学年内の相対位置（平均点および最高点との乖離度）を組み合わせることで、全国模試を受けた場合と極めて近い偏差値を統計的に逆算できるためです。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Q: 入力した点数や個人情報は外部に送信・保存されますか？</div>
+      <div class="qa-a">A: 一切送信されません。すべての計算はお使いのブラウザ内部で即時に処理されます。前回のテスト結果との比較データも、お使いの端末（ブラウザ）内のみに安全に保存されます。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Q: 自分の高校名がリストに見当たらない場合はどうすればいいですか？</div>
+      <div class="qa-a">A: 「高校偏差値を直接入力」タブに切り替えて、お通いの高校・コースの偏差値を直接数字で入力していただくか、リクエストリンクより高校の追加申請を送信してください。</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Q: 判定結果が実際の模試とずれることはありますか？</div>
+      <div class="qa-a">A: 定期考査は出題範囲が限定的であるため、模試の実戦力とは多少の差異が生じる場合があります。そのため本ツールでは95%信頼区間レンジ（想定されるブレ幅）を算出して提示しています。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 高校追加リクエスト用モーダル -->
+<div id="request-modal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title">高校の追加リクエスト</div>
+      <button class="modal-close-btn" onclick="closeRequestModal()">[閉じる]</button>
+    </div>
+    <p class="modal-desc">
+      掲載をご希望の高校情報を入力してください。確認後、データベースへ順次追加します。
+    </p>
+    <div class="form-group">
+      <label for="req-school-pref">都道府県</label>
+      <input type="text" id="req-school-pref" placeholder="例: 東京都">
+    </div>
+    <div class="form-group">
+      <label for="req-school-name">高校名・学科名</label>
+      <input type="text" id="req-school-name" placeholder="例: 〇〇高校 普通科">
+    </div>
+    <div class="form-group">
+      <label for="req-school-dev">おおよその合格偏差値（任意）</label>
+      <input type="number" id="req-school-dev" placeholder="例: 61">
+    </div>
+    <button class="btn-3d-main" onclick="submitSchoolRequest()">リクエストを送信する</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#how-to">使い方</a>
+    <a href="#logic">判定基準</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#form-card">診断に戻る</a>
+    <a href="javascript:void(0)" onclick="openRequestModal()">掲載リクエスト</a>
+  </div>
+  <p>定期ナビ - 高校考査 統計学的大学合否予測システム</p>
+  <p style="margin-top: 4px; color: #a1a1aa;">(C) 定期ナビ All Rights Reserved.</p>
+</footer>
+
+<div id="toast">コピーしました</div>
+
+<script>
+// 全国約500校データベース
+const REGIONAL_DATABASE = {
+  "関東": {
+    "東京都（私立・国立中高一貫）": [
+      ["東京学芸大学附属高校", 77], ["東京学芸大学附属国際中等教育学校", 69], ["開成高校", 78],
+      ["筑波大学附属駒場高校", 78], ["筑波大学附属高校", 77], ["桜蔭高校 (中高一貫)", 77],
+      ["麻布高校 (中高一貫)", 77], ["駒場東邦高校 (中高一貫)", 76], ["女子学院高校 (中高一貫)", 76],
+      ["慶應義塾女子高校", 76], ["早稲田実業学校", 76], ["早稲田大学高等学院", 76],
+      ["海城高校 (中高一貫)", 75], ["早稲田高校 (中高一貫)", 75], ["渋谷教育学園渋谷高校 (中高一貫)", 76],
+      ["雙葉高校 (中高一貫)", 75], ["豊島岡女子学園高校 (中高一貫)", 75], ["武蔵高校 (中高一貫)", 74],
+      ["広尾学園高校 (中高一貫)", 74], ["明治大学付属明治高校", 72], ["青山学院高等部", 72],
+      ["中央大学附属高校", 71], ["中央大学杉並高校", 71], ["國學院大學久我山高校", 71],
+      ["白百合学園高校 (中高一貫)", 72], ["鴎友学園女子高校 (中高一貫)", 72], ["吉祥女子高校 (中高一貫)", 72],
+      ["芝高校 (中高一貫)", 71], ["本郷高校 (中高一貫)", 71], ["桐朋高校", 71],
+      ["攻玉社高校 (中高一貫)", 70], ["城北高校 (中高一貫)", 70], ["巣鴨高校 (中高一貫)", 70],
+      ["世田谷学園高校 (中高一貫)", 69], ["大妻高校 (中高一貫)", 70], ["成蹊高校", 69],
+      ["明治大学付属中野高校", 68], ["明大中野八王子高校", 67], ["東京農業大学第一高校", 68],
+      ["富士見高校 (中高一貫)", 68], ["高輪高校 (中高一貫)", 67], ["淑徳高校", 67],
+      ["成城高校", 66], ["田園調布學園高校 (中高一貫)", 66], ["山脇学園高校 (中高一貫)", 67],
+      ["共立女子高校 (中高一貫)", 67], ["拓殖大学第一高校", 66], ["錦城高校", 67],
+      ["帝京大学高校", 67]
+    ],
+    "東京都（都立・公立）": [
+      ["日比谷高校", 73], ["西高校", 72], ["国立高校", 71], ["戸山高校", 71],
+      ["青山高校", 71], ["立川高校", 71], ["八王子東高校", 70], ["新宿高校", 69],
+      ["国際高校", 68], ["駒場高校", 68], ["竹早高校", 67], ["小山台高校", 66],
+      ["武蔵野北高校", 67], ["小金井北高校", 65], ["調布北高校", 64], ["三田高校", 65],
+      ["町田高校", 64], ["北園高校", 64], ["豊多摩高校", 62], ["文京高校", 61],
+      ["城東高校", 60], ["井草高校", 58], ["雪谷高校", 55]
+    ],
+    "神奈川県": [
+      ["聖光学院高校 (中高一貫)", 77], ["慶應義塾高校", 76], ["慶應義塾湘南藤沢高等部", 76],
+      ["栄光学園高校 (中高一貫)", 75], ["横浜翠嵐高校", 75], ["湘南高校", 74],
+      ["浅野高校 (中高一貫)", 74], ["洗足学園高校 (中高一貫)", 74], ["フェリス女学院高校 (中高一貫)", 73],
+      ["柏陽高校", 72], ["サレジオ学院高校 (中高一貫)", 72], ["川和高校", 71],
+      ["厚木高校", 70], ["法政大学第二高校", 70], ["公文国際学園高等部 (中高一貫)", 70],
+      ["法政大学国際高校", 69], ["逗子開成高校 (中高一貫)", 70], ["多摩高校", 69],
+      ["山手学院高校", 69], ["桐蔭学園高校", 68], ["桐光学園高校", 68],
+      ["横浜緑ケ丘高校", 68], ["希望ケ丘高校", 68], ["横浜雙葉高校 (中高一貫)", 70],
+      ["横浜共立学園高校 (中高一貫)", 70], ["光陵高校", 67], ["相模原高校", 67],
+      ["森村学園高等部 (中高一貫)", 66], ["日本女子大学附属高校", 67], ["横浜平沼高校", 66],
+      ["大和高校", 66], ["鎌倉高校", 65], ["市ケ尾高校", 63], ["海老名高校", 61]
+    ],
+    "埼玉県": [
+      ["慶應義塾志木高校", 76], ["大宮高校", 75], ["浦和高校", 74],
+      ["栄東高校 (中高一貫)", 74], ["浦和明の星女子高校 (中高一貫)", 74], ["浦和第一女子高校", 73],
+      ["立教新座高校", 72], ["春日部高校", 72], ["淑徳与野高校", 71], ["川越高校", 71],
+      ["川越女子高校", 70], ["市立浦和高校", 70], ["開智高校 (中高一貫)", 70],
+      ["大宮開成高校", 69], ["蕨高校", 68], ["春日部共栄高校", 68], ["昌平高校", 68],
+      ["西武学園文理高校", 67], ["城北埼玉高校", 67], ["城西大学付属川越高校", 67],
+      ["越谷北高校", 67], ["不動岡高校", 67], ["所沢北高校", 66], ["浦和西高校", 66],
+      ["熊谷高校", 65], ["熊谷女子高校", 64]
+    ],
+    "千葉県": [
+      ["渋谷教育学園幕張高校 (中高一貫)", 76], ["市川高校 (中高一貫)", 75], ["東邦大学付属東邦高校 (中高一貫)", 74],
+      ["県立千葉高校", 74], ["県立船橋高校", 74], ["昭和学院秀英高校", 73], ["東葛飾高校", 72],
+      ["千葉東高校", 71], ["佐倉高校", 70], ["専修大学松戸高校", 70], ["薬園台高校", 70],
+      ["国府台女子学院高等部", 69], ["芝浦工業大学柏高校", 69], ["市立千葉高校", 68],
+      ["小金高校", 67], ["船橋東高校", 66], ["麗澤高校", 65], ["八千代松陰高校", 66],
+      ["八千代高校", 66], ["幕張総合高校", 64]
+    ],
+    "北関東（茨城・栃木・群馬）": [
+      ["土浦第一高校", 72], ["水戸第一高校", 71], ["竹園高校", 67], ["江戸川学園取手高校", 71],
+      ["茗溪学園高校", 67], ["竜ヶ崎第一高校", 66], ["清真学園高校 (中高一貫)", 66],
+      ["宇都宮高校", 71], ["宇都宮女子高校", 70], ["作新学院高校（トップ英進）", 70],
+      ["栃木高校", 66], ["前橋高校", 71], ["高崎高校", 71], ["前橋女子高校", 70],
+      ["高崎女子高校", 68], ["太田高校", 64]
+    ]
+  },
+  "近畿": {
+    "近畿（私立・中高一貫）": [
+      ["灘高校", 78], ["東大寺学園高校", 78], ["西大和学園高校", 76],
+      ["甲陽学院高校 (中高一貫)", 76], ["大阪星光学院高校 (中高一貫)", 76], ["洛南高校", 74],
+      ["清風南海高校 (中高一貫)", 74], ["神戸女学院高等学部 (中高一貫)", 74], ["白陵高校", 73],
+      ["洛星高校 (中高一貫)", 73], ["四天王寺高校 (中高一貫)", 73], ["高槻高校 (中高一貫)", 72],
+      ["同志社高校", 72], ["立命館高校", 71], ["六甲学院高校 (中高一貫)", 72],
+      ["須磨学園高校", 72], ["大阪桐蔭高校", 71], ["関西学院高等部", 70],
+      ["清風高校", 70], ["淳心学院高校 (中高一貫)", 70], ["明星高校", 69],
+      ["関西大学第一高校", 68], ["金蘭千里高校 (中高一貫)", 68], ["雲雀丘学園高校", 68],
+      ["智辯学園高校", 68], ["京都女子高校", 68], ["同志社女子高校", 67],
+      ["立命館宇治高校", 67], ["関西創価高校", 67], ["清教学園高校", 68],
+      ["近畿大学附属高校", 67], ["桃山学院高校", 67], ["東山高校", 67],
+      ["履正社高校", 66], ["滝川第二高校", 66], ["甲南高校", 66], ["仁川学院高校", 64]
+    ],
+    "大阪府（公立）": [
+      ["北野高校", 76], ["天王寺高校", 75], ["三国丘高校", 74], ["茨木高校", 73],
+      ["大手前高校", 73], ["高津高校", 72], ["四條畷高校", 72], ["豊中高校", 71],
+      ["生野高校", 71], ["岸和田高校", 70], ["春日丘高校", 68], ["千里高校", 67],
+      ["寝屋川高校", 65], ["住吉高校", 64], ["清水谷高校", 62], ["夕陽丘高校", 60]
+    ],
+    "兵庫県（公立）": [
+      ["長田高校", 73], ["神戸高校", 73], ["加古川東高校", 71], ["姫路西高校", 71],
+      ["兵庫高校", 70], ["市立西宮高校", 67], ["明石北高校", 67], ["宝塚北高校", 66],
+      ["星陵高校", 65], ["御影高校", 64], ["北須磨高校", 64]
+    ],
+    "京都・滋賀・奈良・和歌山（公立等）": [
+      ["堀川高校", 72], ["膳所高校", 72], ["奈良高校", 72], ["西京高校", 71],
+      ["嵯峨野高校", 71], ["智辯学園和歌山高校", 74], ["畝傍高校", 69],
+      ["彦根東高校", 67], ["郡山高校", 67], ["桐蔭高校(和歌山)", 68]
+    ]
+  },
+  "中部・東海・北陸": {
+    "愛知県": [
+      ["東海高校 (中高一貫)", 74], ["海陽中等教育学校 (中高一貫)", 73], ["南山高校女子部 (中高一貫)", 73],
+      ["南山高校男子部 (中高一貫)", 69], ["旭丘高校", 72], ["岡崎高校", 72],
+      ["滝高校", 72], ["明和高校", 71], ["向陽高校", 71], ["一宮高校", 71],
+      ["刈谷高校", 70], ["菊里高校", 70], ["時習館高校", 69], ["名古屋高校", 68],
+      ["瑞陵高校", 68], ["千種高校", 68], ["半田高校", 67], ["愛知高校", 67],
+      ["愛知淑徳高校 (中高一貫)", 66], ["名城大学附属高校", 66], ["豊田西高校", 66],
+      ["桜台高校", 65], ["中京大学附属中京高校", 65]
+    ],
+    "静岡・岐阜・三重": [
+      ["岐阜高校", 72], ["高田高校(三重)", 72], ["静岡高校", 71], ["四日市高校", 71],
+      ["浜松北高校", 70], ["大垣北高校", 69], ["沼津東高校", 68], ["津高校", 68],
+      ["清水東高校", 66], ["磐田南高校", 65], ["四日市南高校", 64]
+    ],
+    "北陸・甲信越": [
+      ["金沢泉丘高校", 71], ["藤島高校", 71], ["新潟高校", 71], ["富山中部高校", 71],
+      ["長野高校", 70], ["甲府南高校", 70], ["松本深志高校", 69], ["金沢二水高校", 67],
+      ["上田高校", 66], ["高志高校", 66], ["小松高校", 65], ["長岡高校", 65]
+    ]
+  },
+  "中国・四国": {
+    "中国地方": [
+      ["広島大学附属高校", 74], ["広島学院高校 (中高一貫)", 74], ["岡山白陵高校", 73],
+      ["ノートルダム清心高校 (中高一貫)", 70], ["基町高校", 69], ["修道高校 (中高一貫)", 69],
+      ["岡山朝日高校", 68], ["舟入高校", 67], ["山口高校", 67], ["松江北高校", 66],
+      ["鳥取西高校", 67]
+    ],
+    "四国地方": [
+      ["愛光高校 (中高一貫)", 74], ["高松高校", 70], ["土佐高校 (中高一貫)", 69],
+      ["松山東高校", 68], ["丸亀高校", 68], ["徳島市立高校", 66], ["高知追手前高校", 64]
+    ]
+  },
+  "九州・沖縄": {
+    "福岡県": [
+      ["久留米大学附設高校 (中高一貫)", 76], ["修猷館高校", 73], ["福岡高校", 72],
+      ["筑紫丘高校", 72], ["福岡大学附属大濠高校", 72], ["小倉高校", 70], ["東筑高校", 70],
+      ["明善高校", 70], ["西南学院高校", 70], ["城南高校", 68], ["春日高校", 67],
+      ["東福岡高校", 66], ["香住丘高校", 64]
+    ],
+    "九州他県・沖縄": [
+      ["ラ・サール高校 (中高一貫)", 75], ["青雲高校 (中高一貫)", 74], ["熊本高校", 73],
+      ["鶴丸高校", 71], ["昭和薬科大学附属高校", 72], ["弘学館高校", 70],
+      ["大分上野丘高校", 71], ["宮崎大宮高校", 70], ["済々黌高校", 69],
+      ["志學館高等部", 68], ["佐賀西高校", 68], ["開邦高校", 68], ["熊本学園大学付属高校", 67]
+    ]
+  },
+  "その他": {
+    "基準偏差値から指定": [
+      ["偏差値 75相当（最難関進学校水準）", 75],
+      ["偏差値 70相当（トップ進学校水準）", 70],
+      ["偏差値 65相当（上位進学校水準）", 65],
+      ["偏差値 60相当（中堅上位校水準）", 60],
+      ["偏差値 55相当（中堅校水準）", 55],
+      ["偏差値 50相当（標準校水準）", 50]
+    ]
+  }
+};
+
+const INDIVIDUAL_UNIVERSITIES = [
+  { name: "東京大学", type: "national", border: 70 },
+  { name: "京都大学", type: "national", border: 68 },
+  { name: "一橋大学", type: "national", border: 67 },
+  { name: "東京工業大学（東京科学大）", type: "national", border: 66 },
+  { name: "大阪大学", type: "national", border: 65 },
+  { name: "東北大学", type: "national", border: 63 },
+  { name: "名古屋大学", type: "national", border: 63 },
+  { name: "九州大学", type: "national", border: 62 },
+  { name: "北海道大学", type: "national", border: 61 },
+  { name: "神戸大学", type: "national", border: 62 },
+  { name: "筑波大学", type: "national", border: 60 },
+  { name: "横浜国立大学", type: "national", border: 60 },
+  { name: "千葉大学", type: "national", border: 58 },
+  { name: "東京都立大学", type: "national", border: 57 },
+  { name: "広島大学", type: "national", border: 56 },
+  { name: "金沢大学", type: "national", border: 55 },
+  { name: "岡山大学", type: "national", border: 55 },
+  { name: "信州大学", type: "national", border: 51 },
+  { name: "静岡大学", type: "national", border: 51 },
+  { name: "早稲田大学（法・政経・理工）", type: "private", border: 67 },
+  { name: "慶應義塾大学（法・経済・理工）", type: "private", border: 67 },
+  { name: "上智大学", type: "private", border: 63 },
+  { name: "東京理科大学", type: "private", border: 62 },
+  { name: "明治大学", type: "private", border: 61 },
+  { name: "立教大学", type: "private", border: 60 },
+  { name: "青山学院大学", type: "private", border: 60 },
+  { name: "同志社大学", type: "private", border: 60 },
+  { name: "中央大学", type: "private", border: 58 },
+  { name: "法政大学", type: "private", border: 57 },
+  { name: "立命館大学", type: "private", border: 57 },
+  { name: "関西学院大学", type: "private", border: 56 },
+  { name: "関西大学", type: "private", border: 55 },
+  { name: "学習院大学", type: "private", border: 55 },
+  { name: "日本大学", type: "private", border: 50 },
+  { name: "東洋大学", type: "private", border: 50 },
+  { name: "近畿大学", type: "private", border: 51 }
+];
+
+let G_STATE = {};
+let CURRENT_FILTER = "all";
+let CURRENT_SCHOOL_MODE = "search";
+let FLAT_SCHOOL_LIST = [];
+
+window.addEventListener("DOMContentLoaded", () => {
+  for (const [region, prefs] of Object.entries(REGIONAL_DATABASE)) {
+    for (const [pref, schools] of Object.entries(prefs)) {
+      schools.forEach(([name, dev]) => {
+        FLAT_SCHOOL_LIST.push({ name, dev, pref, region });
+      });
+    }
+  }
+
+  const regSel = document.getElementById("region-select");
+  for (const region of Object.keys(REGIONAL_DATABASE)) {
+    const opt = document.createElement("option");
+    opt.value = region;
+    opt.textContent = region;
+    regSel.appendChild(opt);
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const sharedStatus = urlParams.get("status");
+  const sharedDev = urlParams.get("dev");
+  const sharedSchool = urlParams.get("school");
+
+  if (sharedStatus && sharedDev) {
+    document.title = `${sharedStatus}（偏差値 ${sharedDev}）| 定期ナビ`;
+    const sharedCard = document.getElementById("shared-result-card");
+    document.getElementById("shared-status-text").textContent = sharedStatus;
+    document.getElementById("shared-detail-text").textContent = 
+      `${sharedSchool ? sharedSchool + "の考査データに基づく判定 / " : ""}推定偏差値 ${sharedDev}`;
+    sharedCard.style.display = "block";
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-box-wrap")) {
+      document.getElementById("search-suggest-box").style.display = "none";
+    }
+  });
+});
+
+function switchSchoolMode(mode) {
+  CURRENT_SCHOOL_MODE = mode;
+  const tabSearch = document.getElementById("tab-mode-search");
+  const tabDirect = document.getElementById("tab-mode-direct");
+  const areaSearch = document.getElementById("school-mode-search-area");
+  const areaDirect = document.getElementById("school-mode-direct-area");
+
+  if (mode === "search") {
+    tabSearch.classList.add("active");
+    tabDirect.classList.remove("active");
+    areaSearch.style.display = "block";
+    areaDirect.style.display = "none";
+  } else {
+    tabDirect.classList.add("active");
+    tabSearch.classList.remove("active");
+    areaDirect.style.display = "block";
+    areaSearch.style.display = "none";
+  }
+}
+
+function onSchoolSearch() {
+  const query = document.getElementById("school-search-input").value.trim().toLowerCase();
+  const box = document.getElementById("search-suggest-box");
+
+  if (!query) {
+    box.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+
+  const matches = FLAT_SCHOOL_LIST.filter(s => s.name.toLowerCase().includes(query)).slice(0, 10);
+
+  if (matches.length === 0) {
+    box.innerHTML = `
+      <div style="padding: 10px 12px; font-size: 11px; color: #71717a;">
+        見つかりませんでした。「高校偏差値を直接入力」タブをご利用いただくか、<a href="javascript:void(0)" onclick="openRequestModal()" style="color: #09090b; font-weight: 700;">追加リクエスト</a> を送信してください。
+      </div>`;
+    box.style.display = "block";
+    return;
+  }
+
+  box.innerHTML = matches.map(s => `
+    <div class="suggest-item" onclick="selectSearchSchool('${s.name}', ${s.dev})">
+      <span class="suggest-name">${s.name}</span>
+      <span class="suggest-meta">${s.pref} / 偏差値 ${s.dev}</span>
+    </div>
+  `).join("");
+  box.style.display = "block";
+}
+
+function selectSearchSchool(name, dev) {
+  document.getElementById("school-search-input").value = name;
+  document.getElementById("search-suggest-box").style.display = "none";
+  setChosenSchool(name, dev);
+}
+
+function setChosenSchool(name, dev) {
+  G_STATE.selectedSchoolName = name;
+  G_STATE.selectedSchoolDev = dev;
+
+  document.getElementById("selected-school-name").textContent = name;
+  document.getElementById("selected-school-dev").textContent = dev;
+  document.getElementById("selected-school-banner").style.display = "block";
+}
+
+function onRegionChange() {
+  const region = document.getElementById("region-select").value;
+  const prefSel = document.getElementById("pref-select");
+  const schoolSel = document.getElementById("school-select");
+
+  prefSel.innerHTML = '<option value="">選択してください</option>';
+  schoolSel.innerHTML = '<option value="">先に都道府県を選択</option>';
+  schoolSel.disabled = true;
+
+  if (!region) {
+    prefSel.disabled = true;
+    return;
+  }
+
+  prefSel.disabled = false;
+  for (const pref of Object.keys(REGIONAL_DATABASE[region])) {
+    const opt = document.createElement("option");
+    opt.value = pref;
+    opt.textContent = pref;
+    prefSel.appendChild(opt);
+  }
+}
+
+function onPrefChange() {
+  const region = document.getElementById("region-select").value;
+  const pref = document.getElementById("pref-select").value;
+  const schoolSel = document.getElementById("school-select");
+
+  schoolSel.innerHTML = '<option value="">選択してください</option>';
+
+  if (!pref) {
+    schoolSel.disabled = true;
+    return;
+  }
+
+  schoolSel.disabled = false;
+  const schools = REGIONAL_DATABASE[region][pref];
+  schools.forEach(([name, dev]) => {
+    const opt = document.createElement("option");
+    opt.value = dev;
+    opt.dataset.name = name;
+    opt.textContent = name;
+    schoolSel.appendChild(opt);
+  });
+}
+
+function onSelectDropdownSchool() {
+  const schoolSel = document.getElementById("school-select");
+  const dev = parseFloat(schoolSel.value);
+  const name = schoolSel.options[schoolSel.selectedIndex]?.dataset.name;
+  if (!isNaN(dev) && name) {
+    setChosenSchool(name, dev);
+    document.getElementById("school-search-input").value = name;
+  }
+}
+
+function openRequestModal() {
+  document.getElementById("request-modal").style.display = "flex";
+}
+
+function closeRequestModal() {
+  document.getElementById("request-modal").style.display = "none";
+}
+
+// Googleフォーム連携・本番送信関数
+async function submitSchoolRequest() {
+  const pref = document.getElementById("req-school-pref").value.trim();
+  const name = document.getElementById("req-school-name").value.trim();
+  const dev = document.getElementById("req-school-dev").value.trim();
+
+  if (!pref || !name) {
+    alert("都道府県と高校名を入力してください。");
+    return;
+  }
+
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSe7zko-GrqJjfU03yMO6R0d4DH4O9J48KSmCGc4AkLHzsDSlw/formResponse";
+
+  const formData = new FormData();
+  formData.append("entry.2089467454", pref);
+  formData.append("entry.701446335", name);
+  formData.append("entry.429443265", dev);
+
+  try {
+    await fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    });
+  } catch (e) {
+  }
+
+  closeRequestModal();
+  document.getElementById("req-school-pref").value = "";
+  document.getElementById("req-school-name").value = "";
+  document.getElementById("req-school-dev").value = "";
+  showToast("リクエストを送信しました");
+}
+
+function scrollToForm() {
+  document.getElementById("form-card").scrollIntoView({ behavior: "smooth" });
+}
+
+function runAnalysis() {
+  let schoolDev = 0;
+  let schoolName = "";
+
+  if (CURRENT_SCHOOL_MODE === "search") {
+    if (!G_STATE.selectedSchoolDev) {
+      alert("高校名を検索するか、一覧から選択してください。見当たらない場合は「高校偏差値を直接入力」タブをご利用ください。");
+      return;
+    }
+    schoolDev = G_STATE.selectedSchoolDev;
+    schoolName = G_STATE.selectedSchoolName;
+  } else {
+    const directDev = parseFloat(document.getElementById("direct-school-dev").value);
+    const directName = document.getElementById("direct-school-name").value.trim() || "所属高校";
+    if (isNaN(directDev) || directDev < 30 || directDev > 85) {
+      alert("高校の偏差値を30から85の範囲で正しく入力してください。");
+      return;
+    }
+    schoolDev = directDev;
+    schoolName = directName;
+  }
+
+  const track = document.getElementById("track-select").value;
+  const maxScore = parseFloat(document.getElementById("max-score").value) || 100;
+  const topScore = parseFloat(document.getElementById("test-max").value);
+  const avg = parseFloat(document.getElementById("test-average").value);
+  const score = parseFloat(document.getElementById("user-score").value);
+
+  if (isNaN(topScore) || isNaN(avg) || isNaN(score)) {
+    alert("点数をすべて正しく入力してください。");
+    return;
+  }
+
+  if (topScore > maxScore || score > maxScore || avg > topScore) {
+    alert("点数を確認してください（最高点や得点が満点を超えているか、平均点が最高点を超えています）。");
+    return;
+  }
+
+  document.getElementById("loading").style.display = "block";
+  document.getElementById("result-dashboard").style.display = "none";
+
+  setTimeout(() => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("result-dashboard").style.display = "block";
+
+    G_STATE = { ...G_STATE, schoolDev, schoolName, track, maxScore, topScore, avg, score };
+
+    const slider = document.getElementById("score-slider");
+    slider.min = Math.max(0, Math.floor(avg - 25));
+    slider.max = maxScore;
+    slider.value = score;
+    document.getElementById("sim-score-val").textContent = score;
+
+    updateDashboard(score);
+    handleHistory(score, G_STATE.currentDev);
+
+  }, 220);
+}
+
+function onSliderMove() {
+  const simScore = parseFloat(document.getElementById("score-slider").value);
+  document.getElementById("sim-score-val").textContent = simScore;
+  updateDashboard(simScore);
+}
+
+function updateDashboard(currentScore) {
+  const { schoolDev, track, maxScore, topScore, avg } = G_STATE;
+
+  const scale = 100 / maxScore;
+  const nScore = currentScore * scale;
+  const nAvg = avg * scale;
+  const nTop = topScore * scale;
+
+  let spread = nTop - nAvg;
+  let sigma = Math.max(9.0, Math.min(24.0, spread / 2.88));
+
+  let baseDev = 50.0 + (schoolDev - 60.0) * 1.12;
+  if (track === "sciences") {
+    baseDev += 1.5;
+  }
+
+  const shrinkK = 0.58;
+  const zScore = (nScore - nAvg) / sigma;
+  const pctRank = (1 - normalCdf(zScore)) * 100;
+  const displayPct = Math.max(0.5, Math.min(99.5, Math.round(pctRank * 10) / 10));
+
+  let nationalDev = baseDev + (zScore * 10 * shrinkK);
+  nationalDev = Math.min(78.0, Math.max(32.0, nationalDev));
+  nationalDev = parseFloat(nationalDev.toFixed(1));
+
+  G_STATE.currentDev = nationalDev;
+  G_STATE.currentPct = displayPct;
+
+  if (nationalDev >= 68) G_STATE.rankPhrase = "東大・京大合格圏内にランクインしました！";
+  else if (nationalDev >= 64) G_STATE.rankPhrase = "早慶合格圏内にランクインしました！";
+  else if (nationalDev >= 58) G_STATE.rankPhrase = "MARCH・関関同立合格圏内にランクインしました！";
+  else if (nationalDev >= 50) G_STATE.rankPhrase = "地方国公立・日東駒専合格圏内にランクインしました！";
+  else G_STATE.rankPhrase = "基礎固め・逆転合格ゾーンにランクインしました！";
+
+  const rangeMargin = 2.2;
+  const lowDev = (nationalDev - rangeMargin).toFixed(1);
+  const highDev = (nationalDev + rangeMargin).toFixed(1);
+
+  let kyoteRate = Math.round(50 + (nationalDev - 50) * 1.35);
+  kyoteRate = Math.min(95, Math.max(35, kyoteRate));
+
+  let powerScore = Math.round(((nationalDev - 40) / 38) * 100);
+  powerScore = Math.min(99, Math.max(15, powerScore));
+
+  document.getElementById("res-dev").textContent = nationalDev;
+  document.getElementById("res-range").textContent = `レンジ: ${lowDev}〜${highDev}`;
+  document.getElementById("res-pct").textContent = `${displayPct}%`;
+  document.getElementById("res-kyote").textContent = `${kyoteRate}%`;
+  document.getElementById("res-power").textContent = `${powerScore}/100`;
+
+  let pointerTop = 178;
+  if (nationalDev >= 68) pointerTop = 8;
+  else if (nationalDev >= 64) pointerTop = 50;
+  else if (nationalDev >= 58) pointerTop = 92;
+  else if (nationalDev >= 50) pointerTop = 135;
+  document.getElementById("scale-pointer").style.top = pointerTop + "px";
+
+  renderMatrix(nationalDev);
+  renderRoadmap(nationalDev, displayPct, currentScore, avg, sigma, scale, shrinkK);
+
+  document.getElementById("share-url-preview").textContent = getRawShareUrl();
+}
+
+function setFilter(filterType) {
+  CURRENT_FILTER = filterType;
+  const tabs = document.querySelectorAll(".tab-btn");
+  tabs.forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+  if (G_STATE.currentDev) {
+    renderMatrix(G_STATE.currentDev);
+  }
+}
+
+function renderMatrix(dev) {
+  const tbody = document.getElementById("matrix-body");
+  tbody.innerHTML = "";
+
+  const filtered = INDIVIDUAL_UNIVERSITIES.filter(u => {
+    if (CURRENT_FILTER === "all") return true;
+    return u.type === CURRENT_FILTER;
+  });
+
+  filtered.forEach(univ => {
+    const diff = dev - univ.border;
+    const probVal = 1 / (1 + Math.exp(-0.6 * diff));
+    const probPct = Math.min(95, Math.max(5, Math.round(probVal * 100)));
+
+    let evalRank = "E";
+    if (probPct >= 80) evalRank = "A";
+    else if (probPct >= 60) evalRank = "B";
+    else if (probPct >= 40) evalRank = "C";
+    else if (probPct >= 20) evalRank = "D";
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${univ.name}</strong></td>
+      <td>${univ.type === "national" ? "国公立" : "私立"}</td>
+      <td>偏差値 ${univ.border}</td>
+      <td><span class="badge-eval eval-${evalRank}">${evalRank}</span></td>
+      <td style="font-family: monospace;">${probPct}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderRoadmap(dev, pct, score, avg, sigma, scale, shrinkK) {
+  const container = document.getElementById("advisory-roadmap");
+
+  let targetDev = 58;
+  let targetName = "MARCH・関関同立（偏差値58）";
+  if (dev >= 67) {
+    targetDev = 70;
+    targetName = "東京大・京都大（偏差値70）";
+  } else if (dev >= 62) {
+    targetDev = 67;
+    targetName = "早稲田・慶應上位（偏差値67）";
+  } else if (dev >= 55) {
+    targetDev = 62;
+    targetName = "上位国公立・早慶（偏差値62）";
+  }
+
+  const devGap = targetDev - dev;
+  const neededScore = Math.ceil((devGap / (10 * shrinkK)) * sigma / scale);
+
+  let shortTerm = `次回考査で平均点＋${Math.round(Math.max(4, score - avg + neededScore))}点（目標＋${neededScore}点）を確保し、校内パーセンタイル上位${Math.max(1, Math.round(pct * 0.6))}%以内への定着を図る。`;
+  let midTerm = dev >= 60 ? "共通テスト予想得点率80%超えを目指し、マーク模試での時間配分と各大問の失点要因を分析・補強。" : "教科書章末問題および標準問題集の典型解法を1周完全習得し、ケアレスミスによる失点をゼロ化。";
+  let longTerm = dev >= 64 ? "国公立二次・私立一般の過去問演習（記述部分点の最大化）へシフト。" : "志望校過去問を早期に1年分確認し、出題傾向と現在の実力ギャップを把握。";
+
+  container.innerHTML = `
+    <div class="roadmap-step">
+      <div class="step-label">目標大学判定ギャップ</div>
+      <div class="step-content"><strong>【${targetName}】</strong> の合格圏（B判定以上）到達まで、定期考査であと <strong>約 ＋${neededScore}点</strong> の上乗せが必要です。</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="step-label">短期タスク（定期考査）</div>
+      <div class="step-content">${shortTerm}</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="step-label">中期タスク（模試対策）</div>
+      <div class="step-content">${midTerm}</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="step-label">長期タスク（二次・一般実戦）</div>
+      <div class="step-content">${longTerm}</div>
+    </div>
+  `;
+}
+
+function normalCdf(z) {
+  const t = 1.0 / (1.0 + 0.2316419 * Math.abs(z));
+  const d = 0.3989423 * Math.exp(-z * z / 2.0);
+  let p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  return z > 0 ? 1.0 - p : p;
+}
+
+function handleHistory(score, dev) {
+  const historyBadge = document.getElementById("history-badge");
+  const lastDataStr = localStorage.getItem("teikinavi_last_result");
+
+  if (lastDataStr) {
+    try {
+      const last = JSON.parse(lastDataStr);
+      const diffDev = (dev - last.dev).toFixed(1);
+      const diffSign = diffDev >= 0 ? `+${diffDev}` : diffDev;
+      historyBadge.style.display = "block";
+      historyBadge.innerHTML = `前回の判定（偏差値 ${last.dev}）から <strong>${diffSign}</strong> 推移しました。`;
+    } catch(e) {}
+  }
+
+  localStorage.setItem("teikinavi_last_result", JSON.stringify({ score, dev, date: Date.now() }));
+}
+
+function getRawShareUrl() {
+  const baseUrl = window.location.origin + window.location.pathname;
+  const phrase = G_STATE.rankPhrase || "大学合格立ち位置判定";
+  const dev = G_STATE.currentDev || "--";
+  const school = G_STATE.schoolName || "所属高校";
+  return `${baseUrl}?status=${phrase}&dev=${dev}&school=${school}`;
+}
+
+function getEncodedShareUrl() {
+  const baseUrl = window.location.origin + window.location.pathname;
+  const phrase = encodeURIComponent(G_STATE.rankPhrase || "大学合格立ち位置判定");
+  const dev = G_STATE.currentDev || "--";
+  const school = encodeURIComponent(G_STATE.schoolName || "所属高校");
+  return `${baseUrl}?status=${phrase}&dev=${dev}&school=${school}`;
+}
+
+function shareX() {
+  const url = getEncodedShareUrl();
+  const text = encodeURIComponent(`【いつもの定期テストで大学合格判定】\n${G_STATE.schoolName}の定期テストから診断：${G_STATE.rankPhrase}\n（推定偏差値 ${G_STATE.currentDev}）\n`);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(url)}`, "_blank");
+}
+
+function shareLine() {
+  const url = getEncodedShareUrl();
+  const text = encodeURIComponent(`【いつもの定期テストで大学合格判定】\n${G_STATE.schoolName}の定期テストから診断：${G_STATE.rankPhrase}\n（推定偏差値 ${G_STATE.currentDev}）\n${url}`);
+  window.open(`https://social-plugins.line.me/lineit/share?url=${text}`, "_blank");
+}
+
+function copyResult() {
+  const url = getRawShareUrl();
+  navigator.clipboard.writeText(url).then(() => {
+    showToast("URLをコピーしました");
+  }).catch(() => {
+    showToast("コピーに失敗しました");
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+</script>
+
+</body>
+</html>
